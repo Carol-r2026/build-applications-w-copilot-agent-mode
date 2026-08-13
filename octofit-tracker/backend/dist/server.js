@@ -14,8 +14,9 @@ const leaderboardRoutes_1 = __importDefault(require("./routes/leaderboardRoutes"
 const workoutRoutes_1 = __importDefault(require("./routes/workoutRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = process.env.PORT || 8000;
+const port = Number(process.env.PORT) || 8000;
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
+const codespaceName = process.env.CODESPACE_NAME;
 // Connect to MongoDB
 mongoose_1.default
     .connect(mongoUri)
@@ -28,11 +29,12 @@ mongoose_1.default
 });
 // Codespaces-aware API URL support
 const getApiUrl = () => {
-    if (process.env.CODESPACE_NAME) {
-        return `https://${process.env.CODESPACE_NAME}-${port}.app.github.dev`;
+    if (codespaceName) {
+        return `https://${codespaceName}-8000.app.github.dev`;
     }
     return `http://localhost:${port}`;
 };
+const apiUrl = getApiUrl();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 // Health check endpoint
@@ -40,8 +42,16 @@ app.get('/api/health', (_req, res) => {
     res.json({
         status: 'ok',
         message: 'OctoFit Tracker API is running',
-        apiUrl: getApiUrl(),
-        codespace: process.env.CODESPACE_NAME || 'local'
+        apiUrl,
+        codespace: codespaceName || 'local'
+    });
+});
+app.get('/api/config', (_req, res) => {
+    res.json({
+        port,
+        apiUrl,
+        codespace: codespaceName || 'local',
+        environment: process.env.NODE_ENV || 'development'
     });
 });
 // API Routes
@@ -52,7 +62,7 @@ app.use('/api/leaderboard', leaderboardRoutes_1.default);
 app.use('/api/workouts', workoutRoutes_1.default);
 app.listen(port, () => {
     console.log(`🚀 OctoFit Tracker API listening on port ${port}`);
-    console.log(`🌐 API URL: ${getApiUrl()}`);
-    console.log(`🎯 Codespace: ${process.env.CODESPACE_NAME || 'local'}`);
+    console.log(`🌐 API URL: ${apiUrl}`);
+    console.log(`🎯 Codespace: ${codespaceName || 'local'}`);
 });
 exports.default = app;
