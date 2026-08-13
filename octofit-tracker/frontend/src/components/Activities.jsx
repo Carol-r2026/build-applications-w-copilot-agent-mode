@@ -1,14 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-
-const getApiBaseUrl = () => {
-  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
-
-  if (typeof codespaceName === 'string' && codespaceName.trim() !== '') {
-    return `https://${codespaceName.trim()}-8000.app.github.dev`;
-  }
-
-  return 'http://localhost:8000';
-};
+import { buildApiUrl } from '../config/api';
 
 const extractActivities = (payload) => {
   if (Array.isArray(payload)) {
@@ -35,7 +26,7 @@ function Activities() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const apiUrl = useMemo(() => `${getApiBaseUrl()}/api/activities/`, []);
+  const apiUrl = useMemo(() => buildApiUrl('/api/activities/'), []);
 
   useEffect(() => {
     const fetchActivities = async () => {

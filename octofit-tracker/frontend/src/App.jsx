@@ -4,17 +4,8 @@ import Leaderboard from './components/Leaderboard';
 import Teams from './components/Teams';
 import Users from './components/Users';
 import Workouts from './components/Workouts';
+import { getApiBaseUrl } from './config/api';
 import './App.css';
-
-const getApiBaseUrl = () => {
-  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
-
-  if (typeof codespaceName === 'string' && codespaceName.trim() !== '') {
-    return `https://${codespaceName.trim()}-8000.app.github.dev`;
-  }
-
-  return 'http://localhost:8000';
-};
 
 function HomePage() {
   return (
@@ -69,7 +60,7 @@ function App() {
         <div className="alert alert-light border mb-4">
           <strong>API base URL:</strong> {apiBaseUrl}
           <div className="small text-muted mt-1">
-            Set VITE_CODESPACE_NAME in .env.local to use a Codespaces endpoint.
+            Set VITE_CODESPACE_NAME in .env.local for local overrides; Codespaces hosts are detected automatically.
           </div>
         </div>
 

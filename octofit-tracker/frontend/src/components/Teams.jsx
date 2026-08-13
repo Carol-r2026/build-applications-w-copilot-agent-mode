@@ -1,14 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-
-const getApiBaseUrl = () => {
-  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
-
-  if (typeof codespaceName === 'string' && codespaceName.trim() !== '') {
-    return `https://${codespaceName.trim()}-8000.app.github.dev`;
-  }
-
-  return 'http://localhost:8000';
-};
+import { buildApiUrl } from '../config/api';
 
 const extractTeams = (payload) => {
   if (Array.isArray(payload)) {
@@ -35,7 +26,7 @@ function Teams() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const apiUrl = useMemo(() => `${getApiBaseUrl()}/api/teams/`, []);
+  const apiUrl = useMemo(() => buildApiUrl('/api/teams/'), []);
 
   useEffect(() => {
     const fetchTeams = async () => {
