@@ -25,7 +25,7 @@ function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+// https://YOUR-CODESPACE-8000.app.github.dev/api/leaderboard
   const apiUrl = useMemo(() => buildApiUrl('/api/leaderboard/'), []);
 
   useEffect(() => {

@@ -25,7 +25,7 @@ function Teams() {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+// https://YOUR-CODESPACE-8000.app.github.dev/api/teams
   const apiUrl = useMemo(() => buildApiUrl('/api/teams/'), []);
 
   useEffect(() => {

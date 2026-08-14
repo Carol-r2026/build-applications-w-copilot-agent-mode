@@ -25,7 +25,7 @@ function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+// https://YOUR-CODESPACE-8000.app.github.dev/api/workouts
   const apiUrl = useMemo(() => buildApiUrl('/api/workouts/'), []);
 
   useEffect(() => {
