@@ -1,0 +1,51 @@
+.app-shell {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f4f7fb 0%, #edf3ff 100%);
+}
+
+.navbar {
+  padding: 0.9rem 1rem;
+}
+
+.nav-link {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.nav-link.active {
+  color: #fff !important;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+.page-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(13, 110, 253, 0.08);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+}
+
+.card {
+  border-radius: 16px;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+@media (max-width: 767px) {
+  .page-card {
+    padding: 1.25rem;
+  }
+}
